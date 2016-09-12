@@ -13,6 +13,6 @@ Func CreateThread($sCallback)
 	Return (Not @error And IsArray($aResult)) ? $aResult[0] : SetError(1, 0, False)
 EndFunc   ;==>CreateThread
 
-Func TerminateThread($hWnd)
-	Return DllCall("kernel32.dll", "bool", "TerminateThread", "handle", $hWnd, "dword", 0)
+Func TerminateThread($hThread)
+	Return DllCall("kernel32.dll", "bool", "TerminateThread", "handle", $hThread, "dword", 0)
 EndFunc   ;==>TerminateThread
