@@ -5,11 +5,12 @@
 #ce
 
 Func CreateThread($sCallback)
-	Local $Handle, $Struct
-	$Handle = DllCallbackRegister($sCallback, "int", "ptr")
-	$Struct = DllStructCreate("Char[200];int")
-	DllStructSetData($Struct, 1, 10)
-	Return DllCall("kernel32.dll", "hwnd", "CreateThread", "ptr", 0, "dword", 0, "long", DllCallbackGetPtr($Handle), "ptr", DllStructGetPtr($Struct), "long", 0, "int*", 0)[0]
+	Local $hHandle, $tStruct, $aResult
+	$hHandle = DllCallbackRegister($sCallback, "int", "ptr")
+	$tStruct = DllStructCreate("Char[200];int")
+	DllStructSetData($tStruct, 1, 10)
+	$aResult = DllCall("kernel32.dll", "hwnd", "CreateThread", "ptr", 0, "dword", 0, "long", DllCallbackGetPtr($hHandle), "ptr", DllStructGetPtr($tStruct), "long", 0, "int*", 0)
+	Return (Not @error And IsArray($aResult)) ? $aResult[0] : SetError(1, 0, False)
 EndFunc   ;==>CreateThread
 
 Func TerminateThread($hWnd)
