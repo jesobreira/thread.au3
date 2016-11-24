@@ -31,8 +31,8 @@ While 1
 WEnd
 
 Func Button1Click()
-	CreateThread("thread1")
-	CreateThread("thread2")
+	_Thread_Create("thread1")
+	_Thread_Create("thread2")
 EndFunc
 
 ; Threads

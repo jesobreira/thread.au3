@@ -2,17 +2,17 @@
 
 #include 'thread.au3'
 
-$h = CreateThread("foo")
+$h = _Thread_Create("foo")
 
 ; Opens another one
-CreateThread("bar")
+_Thread_Create("bar")
 
 ; And opens another one, that will just close itself (as an example)
-CreateThread("openandclose")
+_Thread_Create("openandclose")
 
 MsgBox(0, "Hey", "I am the main thread" & @CRLF & "Opened thread: " & $h)
 
-TerminateThread($h) ; Terminates one of the threads
+_Thread_Terminate($h) ; Terminates one of the threads
 
 Exit ; this is needed, otherwise the main process won't close
 
@@ -25,6 +25,6 @@ Func bar($hThread)
 EndFunc
 
 Func openandclose($hThread)
-	Return TerminateThread($hThread)
+	Return _Thread_Terminate($hThread)
 	MsgBox(0, "Hey", "This message will not show up")
 EndFunc

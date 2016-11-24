@@ -1,6 +1,6 @@
 #include 'thread.au3'
 
-CreateThread("helloworld")
+_Thread_Create("helloworld")
 
 Func helloworld($h)
 	MsgBox(0, "", "Hello from the sub thread")
